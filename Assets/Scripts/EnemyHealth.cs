@@ -2,8 +2,16 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     [SerializeField] int startingHealth = 3;
-    private int currentHealth;
+
+    int currentHealth;
+    void Start()
+    {
+        
+    }
+
     void Awake()
     {
         currentHealth = startingHealth;
@@ -14,18 +22,14 @@ public class EnemyHealth : MonoBehaviour
     {
         
     }
-    public void takeDamage(int amount)
+
+    public void TakeDamage(int amount)
     {
         currentHealth -= amount;
 
-        if (currentHealth < 2)
+        if(currentHealth <= 0)
         {
-            GetComponent<Renderer>().material.color = Color.red;
+            Destroy(this.gameObject);
         }
-
-        if (currentHealth < 0)
-        {
-            Destroy(gameObject);    
-        } 
     }
 }

@@ -5,29 +5,25 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-   NavMeshAgent Agent;
-    [SerializeField] Transform target;
-    [SerializeField] FirstPersonController player;
-    
+    NavMeshAgent agent;
+    FirstPersonController player;
+    //[SerializeField] Transform target;
 
-    private void Awake()
+    void Awake()
     {
-        Agent = GetComponent<NavMeshAgent>();
-
-
-
-
+        agent = GetComponent<NavMeshAgent>();
     }
+
     void Start()
     {
-        //Agent.SetDestination(target.position);
-       player = FindAnyObjectByType<FirstPersonController>();
+        player = FindFirstObjectByType<FirstPersonController>();
+        //agent.SetDestination(target.position);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Agent.SetDestination(player.transform.position);
-
+        agent.SetDestination(player.transform.position);
     }
 }

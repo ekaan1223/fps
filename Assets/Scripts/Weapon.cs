@@ -1,41 +1,26 @@
+using JetBrains.Annotations;
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Weapon : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    StarterAssetsInputs starterAssetsInputs;
-    [SerializeField] int damageAmount = 1;
-    [SerializeField] Animator animator;
+    [SerializeField] ParticleSystem flash;
 
-    void Start()
-    {
-        starterAssetsInputs = GetComponentInParent<StarterAssetsInputs>();
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    public void Shoot(WeaponSO weaponSO)
     {
 
-        if (!starterAssetsInputs.shoot) return;
-        animator.Play("shoot", 0, 0F);
+        flash.Play();
         RaycastHit hit;
 
-       if (Physics.Raycast(Camera.main.transform.position , Camera.main.transform.forward , out hit , Mathf.Infinity))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
         {
             //Debug.Log(hit.collider.name);
+            Instantiate(weaponSO.HitVFX,hit.point,Quaternion.identity);
 
             EnemyHealth enemyHealth = hit.collider.GetComponent<EnemyHealth>();
 
-            if (enemyHealth)
-            {
-                enemyHealth.takeDamage(damageAmount);
+            enemyHealth?.TakeDamage(weaponSO.Damage);
 
-            }
-
-            starterAssetsInputs.ShootInput(false);
         }
     }
 }
