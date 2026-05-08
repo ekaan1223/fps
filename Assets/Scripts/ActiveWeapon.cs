@@ -49,8 +49,8 @@ public class ActiveWeapon : MonoBehaviour
         //Weapon newWapon = Instantiate(weaponSO.weaponPrefab, transform).GetComponent<Weapon>();
         //currentWeapon = newWapon;
         //this.weaponSO = WeaponSO;
-        Weapon newWapon = Instantiate(newWeaponSO.WeaponPrefab, transform).GetComponent<Weapon>();
-        currentWeapon = newWapon;
+        Weapon newWeapon = Instantiate(newWeaponSO.WeaponPrefab, transform).GetComponent<Weapon>();
+        currentWeapon = newWeapon;
         this.weaponSO = newWeaponSO;
     }
 
